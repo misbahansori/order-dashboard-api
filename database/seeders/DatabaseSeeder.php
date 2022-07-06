@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Storage;
+use App\Models\Shipping;
 use Illuminate\Database\Seeder;
+
 use Database\Seeders\ProductsTableSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -15,6 +18,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Shipping::factory()->count(rand(4, 10))->create();
+        Storage::factory()->count(rand(2, 6))->create();
         $this->call(ProductsTableSeeder::class);
     }
 }
