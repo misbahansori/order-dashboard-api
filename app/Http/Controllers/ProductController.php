@@ -15,7 +15,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate();
+        $products = Product::query()
+            ->whereIn('name', [
+                'Preset Pack',
+                'Swag Pack',
+                'Bulk Swag'
+            ])
+            ->get();
 
         return ProductResource::collection($products);
     }

@@ -20,7 +20,7 @@ class OrderController extends Controller
             ->get();
 
         return response()->json([
-            'orders' => OrderResource::collection($orders),
+            'data' => OrderResource::collection($orders),
         ]);
     }
 
