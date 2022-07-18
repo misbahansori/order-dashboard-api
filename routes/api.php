@@ -2,13 +2,16 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InOutController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClientSearchController;
-use App\Http\Controllers\ModelAlocationController;
+use App\Http\Controllers\NewBussinessController;
+use App\Http\Controllers\ModelAllocationController;
 use App\Http\Controllers\ShippingAndStorageController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('dashboard')->group(function () {
     Route::get('/overview', DashboardController::class);
     Route::post('/search-client', ClientSearchController::class);
-    Route::get('/model-alocation', ModelAlocationController::class);
+    Route::get('/model-allocation', ModelAllocationController::class);
+    Route::get('/new-bussiness', NewBussinessController::class);
+    Route::get('/in-out', InOutController::class);
 });
