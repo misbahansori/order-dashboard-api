@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         Shipping::factory()->count(rand(4, 10))->create();
         Storage::factory()->count(rand(2, 6))->create();
 
+        $this->call(UsersTableSeeder::class);
         $this->call(ProductsTableSeeder::class);
         $this->call(OrdersTableSeeder::class);
     }
