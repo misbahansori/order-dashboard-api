@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InOutController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClientSearchController;
@@ -40,4 +41,5 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/model-allocation', ModelAllocationController::class);
     Route::get('/new-bussiness', NewBussinessController::class);
     Route::get('/in-out', InOutController::class);
+    Route::get('/reports', ReportController::class);
 });
