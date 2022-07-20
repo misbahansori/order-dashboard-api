@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ApiLoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClientSearchController;
 use App\Http\Controllers\NewBussinessController;
@@ -25,6 +26,7 @@ use App\Http\Controllers\ShippingAndStorageController;
 |
 */
 
+Route::post('/login', ApiLoginController::class);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -41,5 +43,8 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/model-allocation', ModelAllocationController::class);
     Route::get('/new-bussiness', NewBussinessController::class);
     Route::get('/in-out', InOutController::class);
-    Route::get('/reports', ReportController::class);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/report', ReportController::class);
+    });
 });
