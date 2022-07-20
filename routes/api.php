@@ -45,6 +45,6 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/in-out', InOutController::class);
 
     Route::middleware('auth:sanctum')->group(function () {
-        Route::get('/report', ReportController::class);
+        Route::get('/reports', ReportController::class);
     });
 });
