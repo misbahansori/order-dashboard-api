@@ -37,7 +37,7 @@ class ReportController extends Controller
         }
 
         $headers = collect(array_shift($array))->map(function ($item) {
-            return Str::snake($item);
+            return Str::of($item)->snake()->replace('_', ' ');
         });
 
         return response()->json([
