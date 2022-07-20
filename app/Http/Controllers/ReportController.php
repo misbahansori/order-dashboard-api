@@ -30,29 +30,21 @@ class ReportController extends Controller
 
         $csv = explode("\n", $response->body());
 
-        $data = [];
-        $headers = [];
+        $array = [];
 
-        foreach ($csv as $index => $rows) {
-            if ($index == 0) {
-                $headers = explode(',', $rows);
-
-                $headers = array_map(function ($header) {
-                    return Str::snake($header);
-                }, $headers);
-            } else {
-                $rows = explode(',', $rows);
-                if (count($rows) !== count($headers)) {
-                    continue;
-                }
-                $data[] = array_combine($headers, $rows);
-            }
+        foreach ($csv as $key => $value) {
+            $array[] = explode(",", $value);
         }
 
-        array_shift($data);
+        $headers = collect(array_shift($array))->map(function ($item) {
+            return Str::snake($item);
+        });
 
         return response()->json([
-            'data' => $data,
+            'data' => [
+                'headers' => $headers,
+                'rows' => $array,
+            ],
         ]);
     }
 }
