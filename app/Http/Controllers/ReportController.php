@@ -33,7 +33,11 @@ class ReportController extends Controller
         $array = [];
 
         foreach ($csv as $key => $value) {
-            $array[] = explode(",", $value);
+            $rows = explode(",", $value);
+
+            if (count($rows) > 1) {
+                $array[] = $rows;
+            }
         }
 
         $headers = collect(array_shift($array))->map(function ($item) {
