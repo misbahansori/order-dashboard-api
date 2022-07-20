@@ -44,10 +44,13 @@ class ReportController extends Controller
             return Str::of($item)->snake()->replace('_', ' ');
         });
 
+        $currency = $validated['group'] === 'INR_S' ? 'INR' : $validated['group'];
+
         return response()->json([
             'data' => [
-                'headers' => $headers,
-                'rows' => $array,
+                'headers'  => $headers,
+                'rows'     => $array,
+                'currency' => $currency,
             ],
         ]);
     }
