@@ -24,7 +24,6 @@ class ApiLoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            $user->tokens()->delete();
 
             $token = $user->createToken('MyApp');
 
