@@ -18,7 +18,7 @@ class ApiLoginController extends Controller
     public function __invoke(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'username' => ['required'],
             'password' => ['required'],
         ]);
 
