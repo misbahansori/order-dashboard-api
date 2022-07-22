@@ -11,6 +11,7 @@ use App\Http\Controllers\ApiLoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClientSearchController;
 use App\Http\Controllers\NewBussinessController;
+use App\Http\Controllers\ReportPlSymbolController;
 use App\Http\Controllers\ModelAllocationController;
 use App\Http\Controllers\ShippingAndStorageController;
 
@@ -46,5 +47,6 @@ Route::prefix('dashboard')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/reports', ReportController::class);
+        Route::get('/pl-symbol', ReportPlSymbolController::class);
     });
 });

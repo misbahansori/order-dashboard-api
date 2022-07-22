@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CSV;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 
-class ReportController extends Controller
+class ReportPlSymbolController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -21,23 +18,23 @@ class ReportController extends Controller
     {
         $validated = $request->validate([
             'group' => 'required|string|in:INR,INR_S,USD',
-            'group_by' => 'required|string|in:Login,Agent',
+            'start' => 'required|date_format:Y-m-d H:i:s',
+            'end'   => 'required|date_format:Y-m-d H:i:s',
         ]);
 
-        $response = Http::get('http://api.tickpal.com/get_equity.php?', [
-            'grp' => $validated['group'],
-            'by' => $validated['group_by'],
+        $response = Http::get('http://api.tickpal.com/get_pl_symbol.php', [
+            'grp'   => $validated['group'],
+            'start' => $validated['start'],
+            'end'   => $validated['end'],
         ]);
 
         [$headers, $rows] = CSV::parse($response->body());
-
-        $currency = $validated['group'] === 'INR_S' ? 'INR' : $validated['group'];
 
         return response()->json([
             'data' => [
                 'headers'  => $headers,
                 'rows'     => $rows,
-                'currency' => $currency,
+                'currency' => 'INR',
             ],
         ]);
     }
