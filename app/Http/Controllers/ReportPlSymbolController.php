@@ -29,12 +29,13 @@ class ReportPlSymbolController extends Controller
         ]);
 
         [$headers, $rows] = CSV::parse($response->body());
+        $currency = $validated['group'] === 'INR_S' ? 'INR' : $validated['group'];
 
         return response()->json([
             'data' => [
                 'headers'  => $headers,
                 'rows'     => $rows,
-                'currency' => 'INR',
+                'currency' => $currency,
             ],
         ]);
     }
